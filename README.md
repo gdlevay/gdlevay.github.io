@@ -4,9 +4,11 @@
 
 # 1. Data
 
-#### The most important part of answering these questions is gathering enough data to draw a clear picture of the present trends. There are challenges working with large data, the first challenge is that it can be hard to analyze at once due to memory limitations in Python/Pandas. To address this first issue, I converted the large CSV file to a DB file using SQL Connections.
+#### The most important part of answering these questions is gathering enough data to draw a clear picture of the present trends.
 
 ### 1.1 Large Data Issue Solution
+
+#### There are challenges working with large data, the first challenge is that it can be hard to analyze at once due to memory limitations in Python/Pandas. To address this first issue, I converted the large CSV file to a DB file using SQL Connections.
 
 ```
 import csv
