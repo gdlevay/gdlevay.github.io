@@ -66,4 +66,4 @@ total_arts = pd.read_sql('SELECT title, article, date, url, publication, section
 
 From these 30 publishers, I chose 6 publishers to look at: 3 publishers assoociated with misleading content (Buzzfeed, Vox, and Vice) and 3 publishers associated with political leaning (CNN, Fox, The Hill). After some additional data cleaning I ended up with a dataset that contained over 320k separate articles. The breakdown of the number of articles per publisher is shown below.
 
-![Articles Per Publication](/docs/assets/art_per_pub.png)
+![Articles Per Publication](/docs/assets/art_per_pub.png){: width = "50%"}
