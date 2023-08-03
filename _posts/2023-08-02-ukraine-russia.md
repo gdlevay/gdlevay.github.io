@@ -28,18 +28,18 @@ The data which was used in this study consisted of 314k comments from 5.7k threa
 ### Subreddit Types
 
 1. Liberal
-    1. r/liberal, r/neoliberal, r/socialism, r/AskaLiberal, r/ToiletPaperUSA, r/democrats, r/ShitLiberalsSay, r/thedavidpakmanshow
+    - r/liberal, r/neoliberal, r/socialism, r/AskaLiberal, r/ToiletPaperUSA, r/democrats, r/ShitLiberalsSay, r/thedavidpakmanshow
 2. Conservative
-    1. r/conservative, r/republican, r/AskThe_Donald, r/GoldandBlack, r/libertarian, r/walkaway, r/tuesday, r/benshapiro, r/jordanpeterson, r/LouderwithCrowder
+    - r/conservative, r/republican, r/AskThe_Donald, r/GoldandBlack, r/libertarian, r/walkaway, r/tuesday, r/benshapiro, r/jordanpeterson, r/LouderwithCrowder
 3. General
-    1.  r/news, r/politics, r/worldnews, r/Military, r/war, r/anime_titties,  r/history, r/geopolitics, r/PoliticalDiscussion
+    -  r/news, r/politics, r/worldnews, r/Military, r/war, r/anime_titties,  r/history, r/geopolitics, r/PoliticalDiscussion
 4. Location
-    1. r/europe, r/AskEurope, r/ukpolitics, r/ukraine, r/geopolitics, r/askarussian, r/china, r/AskAnAmerican, r/poland
+    - r/europe, r/AskEurope, r/ukpolitics, r/ukraine, r/geopolitics, r/askarussian, r/china, r/AskAnAmerican, r/poland
 
 ### Methodology
 
 All threads containing the phrase “ukraine” were scraped from the 35 different political subreddits. Note, Reddit’s API limits scraping to at most 250 threads per subreddit following a query. This limit caused some of the subreddits to contain comments going back to 2008, while other subreddits only contain comments that go back a few days before the scraping began. The data was then preprocessed by removing the following:“r/…”, mentions, links, punctuation, html tags and additional non UTF-8 specially encoded characters. In addition to removing parts of comments, some comments were removed if they were posted by a bot. After the text was preprocessed the sentiment was calculated using Syuzhet custom dictionary and the NRC Word-Emotion Association Lexicon was used to evaluate the emotions of each individual comment. After sentiment was calculated per comment, the data was aggregated by day and then the mean sentiment of all comments on a particular day was used. The NRC Word-Emotion Association Lexicon counts the number of words associated with a particular emotion, since comments can be any length on Reddit, there is a potential imbalance where the length of a comment can determine how emotional a particular comment is. To offset the potential imbalance of the number of comments driving emotions, the mean number of emotional words per emotion was then divided by the total number of comments made on that particular day per subreddit to normalize the evaluation metrics. After the emotions and sentiment of each subreddit per day were normalized, another mean was taken to find the overall average sentiment and emotionality of the subreddit type. To  display the findings in an easily digestible way, a shiny app was created.
 
-#### Reddit API
+#### Webscraping using the Reddit API
 
 
