@@ -1,9 +1,9 @@
 <header class="site-header">
-  <h3 class="site-title">
-    <a href="{{ site.github.url }}/">
-      Home
+  <button class="btn-home" style="display: contents;">
+    <a href="https://gdlevay.github.io/">
+        <i class="fa fa-home" style=""></i>
     </a>
-  </h3>
+</button>
   <nav class="menu-list">
     {% for item in site.data.settings.menu %}
       <a href="{{ site.github.url }}/{{ item.url }}" class="menu-link">{{ item.name }}</a>
