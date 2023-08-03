@@ -42,4 +42,89 @@ All threads containing the phrase “ukraine” were scraped from the 35 differe
 
 #### Webscraping using the Reddit API
 
+To scrape the thread URLs, I used the R package [RedditExtractoR](https://rdocumentation.org/packages/RedditExtractoR/versions/3.0.9) which uses the Reddit API to acquire the necessary information. I wrote a custom function, that first grabs the 250 most recent thread URLs which contain the word *ukraine*, and filters the URLs to only include threads that contained >1 comments, the function will then loop through the URLs captured in the first part and grab all the comments and place all the comments in a dataframe. The code used to perform this process is included below.
+
+```
+grab_subreddit_content <- function(subreddits_list,
+                      keyword = "ukraine",
+                      sort_by = "new",
+                      period = "all") {
+
+#' Grabs all Reddit comments from threads that contain a keyword from a list of subreddits
+#' @param subreddits_list list of subreddits to search
+#' @param keyword the word to be searched for in a thread
+#' @param sort_by the intended sort specification, the possible values are "hot", "new", "top", "rising"
+#' @param period the intended period specification, the possible values are "hour", "day", "week", "month", "year", "all"
+#' @return reddit_comments returns all of the comments in a list
+#' @examples
+#' subreddit_list <- c("machinelearning", "datascience")
+#' comments <- map(subreddit_list, ~grab_subreddit_content(.x, keyword="tech"))
+
+
+  if (!(sort_by %in% c("hot", "new", "top", "rising"))) {
+    stop('sort_by must be one of "hot", "new", "top", "rising"')
+  }
+
+  if (!(period %in% c("hour", "day", "week", "month", "year", "all"))) {
+    stop('period must be one of "hour", "day", "week", "month", "year", "all"')
+  }
+
+  get_thread_poss <- possibly(get_thread_content, otherwise = NULL)
+
+  start = Sys.time()
+
+  reddit_urls <- map(subreddits_list,
+                         ~find_thread_urls(
+                           keywords = keyword,
+                           sort_by = sort_by,
+                           subreddit = .x,
+                           period = period
+                         ) %>%
+                           filter(comments > 1) %>%
+                           pull(url)) %>%
+    set_names(subreddits_list)
+
+  reddit_comments <- map(reddit_urls,
+                             ~get_thread_poss(.x)) %>%
+    set_names(subreddits_list) %>%
+    discard(~is.null(.x))
+
+  end = Sys.time()
+
+  print(end - start)
+
+  return(reddit_comments)
+
+}
+
+comments <- map(list_sub, ~grab_subreddit_content(.x))
+
+
+```
+
+```
+convert_to_df <- function(subreddit_comment_list, subreddit) {
+
+#' Grabs all Reddit comments from list of comments from grab_subreddit_content and converts to a dataframe
+#' @param subreddit_comment_list list of comments from grab_subreddit_content
+#' @param subreddit labels each dataframe with the subreddit searched
+#' @return final_df returns all of the comments in a dataframe
+#' @examples
+#' subreddit_list <- c("machinelearning", "datascience")
+#' comments <- map(subreddit_list, ~grab_subreddit_content(.x, keyword="tech"))
+#' comment_df <- map2_df(comments, list_sub, convert_to_df)
+
+
+
+  final_df <- as.data.frame(subreddit_comment_list[[1]]$comments) %>%
+    mutate("subreddit" = subreddit)
+
+  return (final_df)
+
+}
+
+comment_df <- map2_df(comments, list_sub, convert_to_df)
+
+```
+
 
