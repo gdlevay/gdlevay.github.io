@@ -13,6 +13,9 @@ image: ukraine-russia-1.jpg
     1. [Data Overview](#data-overview)
         1. [Subreddit Types](#subreddit-types)
     2. [Methodology](#methods)
+        1. [Webscraping using the Reddit API](#webscrape)
+        2. [Text Processing](#text-processing)
+        3. [Sentiment Analysis](#sentiment)
 3. [Results](#results)
 
 ## Introduction
@@ -124,6 +127,42 @@ convert_to_df <- function(subreddit_comment_list, subreddit) {
 }
 
 comment_df <- map2_df(comments, list_sub, convert_to_df)
+
+```
+
+#### Text Processing
+
+Text processing is one of the most crucial aspects to any projects that use text as data. Fortunately, or unfortunately the processing techniques are often specific to the data source and the intended use of the data for the project. For this project specifically, there were reddit specific processing that needed to be performed. Whenever a Reddit user decides to delete their comment on a post it will show up as "[deleted]", whenever a reddit comment is removed by a moderator, the comment will show up as "[removed]". For this project, those two phrases do not add any context to the sentiment so I felt it was best to remove comments that contained these phrases altogether. In addition, it is common on Reddit to reference other subreddits by using the phrase "r/OtherSubreddit", often the subreddit name does not always correlate to what the subreddit is about, so to avoid any false information being introduce, I decided to remove these phrases as well to just focus on the prose. After removing Reddit specific text markers, I performed some additional text cleaning up processes such as replacing all [smart quotes](https://en.wikipedia.org/wiki/Quotation_marks_in_English) “...”, with regular quotation marks such as "...", removing punctuation, and removing all links. The code I used to perform all of these operations is included below.
+
+```
+df_sentiment <- df_sentiment %>%
+  filter(!(comment %in% c("[removed]", "[deleted]"))) %>%
+  filter(!(grepl("This \\w.+ was.+automatically", comment, ignore.case = T))) %>%
+  mutate(
+    comment = str_replace_all(comment, "[Rr]\\/.+?\\W", " "),
+    comment = str_replace_all(comment, "[Rr]\\/.+$", " "),
+    comment = str_replace_all(comment, "(http\\S+)\\s?", "") ,
+    comment = str_replace_all(comment, "(\r)|(\n)", ""),
+    comment = str_replace_all(comment, "\\\031", "'"),
+    comment = str_replace_all(comment, "\\\034", "'"),
+    comment = str_replace_all(comment, "\\\035", "'"),
+    comment = str_replace_all(comment, "&gt;", ""),
+    comment = str_replace_all(comment, "[[:punct:]]", ""),
+    comment = str_replace_all(comment, "\\s+", " "),
+    comment = str_trim(comment, side = "both")
+  ) %>%
+  filter(comment != "")
+
+```
+
+#### Sentiment Analysis
+
+There are several methods to perform sentiment analysis, I used the R package [syuzhet](https://cran.r-project.org/web/packages/syuzhet/) to perform this analysis. Syuzhet contains several different lexicons that can be used for sentiment analysis, I used Syuzhet to calculate overall sentiment, and then I used the NRC lexicon to calculate the prescence of individual emotions. The code to do that is located below.
+
+```
+df_sentiment <- df_sentiment %>%
+  cbind(sentiment = get_sentiment(.[["comment"]])) %>%
+  cbind(get_nrc_sentiment(.[["comment"]]))
 
 ```
 
