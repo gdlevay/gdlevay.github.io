@@ -221,6 +221,5 @@ The results of this investigation were fascinating in the fact that they were no
 To further understand trends and to explore how public sentiment on Reddit around the Ukraine-Russia conflict changed, I created a Rshiny dashboard to showcase my analysis as well as allow anyone to explore the dashboard to uncover any other noteworthy trends. The dashboard can be accessed using this link [Current Events](https://gdlevay.shinyapps.io/sentimentanalysisukrainerussia/_w_252e1ce6/_w_cf6604a3/)
 
 
-
-* Thank you so much for reading this, please feel free to suggest improvements or provide feedback by contacing me using the links included *
+*Thank you so much for reading this, please feel free to suggest improvements or provide feedback by contacing me using the links included*
 
