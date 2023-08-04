@@ -178,21 +178,26 @@ After sentiment and emotions were calculated per comment, I performed several ag
 The first thing to look at was the number of threads containing the word “ukraine”. Below is a graph which shows how the number of mentions of the word “Ukraine” increased significantly immediately before and especially after the Russian invasion on February 24th, 2022.
 
 ![Figure 1: Number of threads mentioning the word “Ukraine” per subreddit type created by Greg LeVay 13 May 2022](../assets/posts_img/ukraine_russia/threads_mention_ukraine.png)
+*Figure 1: Number of threads mentioning the word “Ukraine” per subreddit type created by Greg LeVay 13 May 2022*
 
 
 ![Figure 2: Number of comments mentioning the word “Ukraine” per subreddit type created by Greg LeVay 13 May 2022](../assets/posts_img/ukraine_russia/comments_mention_ukraine.png)
+*Figure 2: Number of comments mentioning the word “Ukraine” per subreddit type created by Greg LeVay 13 May 2022*
 
 The next thing to look at was overall sentiment to understand if there were significant differences. According to the data, there were not significant differences in overall sentiment between conservative and liberal subreddits around the conflict. This can be observed in the graph below.
 
 ![Figure 3: Sentiment Analysis Jan 01 created by Greg LeVay 13 May 2022](../assets/posts_img/ukraine_russia/sentiment_analysis.png)
+*Figure 3: Sentiment Analysis Jan 01 created by Greg LeVay 13 May 2022*
 
 This graph includes data starting on January 1st, 2022. The interesting thing to note here is that sentiment in regard to Ukraine varied widely amongst most of the subreddits in early 2022, but during and after the conflict, the sentiment tended to be more neutral. To gain a more granular view, the above graph was sectioned off to be the few weeks prior and few weeks after the Russian invasion.
 
 ![Figure 4: Sentiment Analysis Feb 08 created by Greg LeVay 13 May 2022](../assets/posts_img/ukraine_russia/sentiment_analysis_granular.png)
+*Figure 4: Sentiment Analysis Feb 08 created by Greg LeVay 13 May 2022*
 
 There are a few noticeable trends in the above graph. The first trend to notice is that on the date of the invasion, February 24th, 2022, all of the subreddit types had negative sentiment. This is likely due to the fact that many people viewed this invasion in an overall negative light. Another trend to notice is that on specific days the conservative and liberal sentiment tended to be relative opposites, meaning where one side had a relative maximum, the other side had a relative minimum. For instance, the graph below shows an example of this phenomenon occurring on 20 Feb 2022.
 
 ![Figure 5: Min/Max points Sentiment Analysis created by Greg LeVay 13 May 2022](../assets/posts_img/ukraine_russia/minmax.png)
+*Figure 5: Min/Max points Sentiment Analysis created by Greg LeVay 13 May 2022*
 
 This trend is likely from specific speeches or political events surrounding the conflict occurring and the two sides having differing opinions of the future outcome of said event.
 
@@ -201,16 +206,20 @@ This trend is likely from specific speeches or political events surrounding the 
 Further insight was gained when looking at specific emotions, particularly negative emotions like anger, sadness, and fear. When looking specifically at “anger”, it is interesting to note that the data gathered as a whole shows that threads and comments had a far greater level of anger towards the situation a month or two prior to the invasion, and anger leveled out to a much greater extent in the few weeks immediately before and after the invasion.
 
 ![Figure 6: Anger Graph created by Greg LeVay 13 May 2022](../assets/posts_img/ukraine_russia/anger_graph.png)
+*Figure 6: Anger Graph created by Greg LeVay 13 May 2022*
 
 Furthermore, looking particularly at the week before the invasion and the week after, the Conservative and Liberal categories were the only groups that had an overall increase in the amount of anger used in their comments.
 
 ![Figure 7: Anger Average Table created by Greg LeVay 13 May 2022](../assets/posts_img/ukraine_russia/anger_table.png)
+*Figure 7: Anger Average Table created by Greg LeVay 13 May 2022*
 
 Similar to “anger”, when looking at “joy” it’s interesting, however, not too shocking, to note that posts were far more joyous, in the months prior to the invasion, however, again, right before and right after the invasion the joy evident is minimal. Nevertheless, in the week leading up to the invasion and the week following the invasion, the positive emotion level was typically higher in the week following. This can be observed in the graph and table below.
 
 ![Figure 8: Joy Graph created by 13 May 2022](../assets/posts_img/ukraine_russia/joy_graph.png)
+*Figure 8: Joy Graph created by 13 May 2022*
 
 ![Figure 9: Joy Average Table created by Greg LeVay 13 May 2022](../assets/posts_img/ukraine_russia/joy_table.png)
+*Figure 9: Joy Average Table created by Greg LeVay 13 May 2022*
 
 ## Conclusion
 
