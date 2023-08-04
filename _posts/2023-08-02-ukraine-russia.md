@@ -17,7 +17,7 @@ image: ukraine-russia-1.jpg
         2. [Text Processing](#text-processing)
         3. [Sentiment Analysis](#sentiment-analysis)
 3. [Results](#results)
-    1. [Sentiment Analysis/Emotions](#sentiment-analysis-emotions)
+    1. [Sentiment Analysis/Emotions](#sentiment-analysis-and-emotions)
 4. [Conclusion](#conclusion)
 5. [Rshiny](#rshiny)
 
@@ -196,7 +196,7 @@ There are a few noticeable trends in the above graph. The first trend to notice 
 
 This trend is likely from specific speeches or political events surrounding the conflict occurring and the two sides having differing opinions of the future outcome of said event.
 
-#### Sentiment Analysis / Emotions
+#### Sentiment Analysis and Emotions
 
 Further insight was gained when looking at specific emotions, particularly negative emotions like anger, sadness, and fear. When looking specifically at “anger”, it is interesting to note that the data gathered as a whole shows that threads and comments had a far greater level of anger towards the situation a month or two prior to the invasion, and anger leveled out to a much greater extent in the few weeks immediately before and after the invasion.
 
