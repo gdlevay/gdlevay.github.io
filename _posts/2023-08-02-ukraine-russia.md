@@ -12,11 +12,16 @@ image: ukraine-russia-1.jpg
 2. [Process](#process)
     1. [Data Overview](#data-overview)
         1. [Subreddit Types](#subreddit-types)
-    2. [Methodology](#methods)
-        1. [Webscraping using the Reddit API](#webscrape)
+    2. [Methodology](#methodology)
+        1. [Webscraping using the Reddit API](#webscraping-using-the-reddit-api)
         2. [Text Processing](#text-processing)
-        3. [Sentiment Analysis](#sentiment)
+        3. [Sentiment Analysis](#sentiment-analysis)
 3. [Results](#results)
+    1. [Sentiment Analysis/Emotions](#sentiment-analysis-emotions)
+4. [Conclusion](#conclusion)
+5. [Rshiny](#rshiny)
+
+
 
 ## Introduction
 
@@ -132,7 +137,7 @@ comment_df <- map2_df(comments, list_sub, convert_to_df)
 
 #### Text Processing
 
-Text processing is one of the most crucial aspects to any projects that use text as data. Fortunately, or unfortunately the processing techniques are often specific to the data source and the intended use of the data for the project. For this project specifically, there were reddit specific processing that needed to be performed. Whenever a Reddit user decides to delete their comment on a post it will show up as "[deleted]", whenever a reddit comment is removed by a moderator, the comment will show up as "[removed]". For this project, those two phrases do not add any context to the sentiment so I felt it was best to remove comments that contained these phrases altogether. In addition, it is common on Reddit to reference other subreddits by using the phrase "r/OtherSubreddit", often the subreddit name does not always correlate to what the subreddit is about, so to avoid any false information being introduce, I decided to remove these phrases as well to just focus on the prose. After removing Reddit specific text markers, I performed some additional text cleaning up processes such as replacing all [smart quotes](https://en.wikipedia.org/wiki/Quotation_marks_in_English) “...”, with regular quotation marks such as "...", removing punctuation, and removing all links. The code I used to perform all of these operations is included below.
+Text processing is one of the most crucial aspects to any projects that use text as data. Fortunately, or unfortunately the processing techniques are often specific to the data source and the intended use of the data for the project. For this project specifically, there were reddit specific processing that needed to be performed. Whenever a Reddit user decides to delete their comment on a post it will show up as "[deleted]", whenever a reddit comment is removed by a moderator, the comment will show up as "[removed]". For this project, those two phrases do not add any context to the sentiment so I felt it was best to remove comments that contained these phrases altogether. In addition, it is common on Reddit to reference other subreddits by using the phrase "r/OtherSubreddit", often the subreddit name does not always correlate to what the subreddit is about, so to avoid any false information being introduced, I decided to remove these phrases as well to just focus on the prose. After removing Reddit specific text markers, I performed some additional text cleaning processes such as replacing all [smart quotes](https://en.wikipedia.org/wiki/Quotation_marks_in_English) “...”, with regular quotation marks such as \"...\", removing punctuation, and removing all links. The code I used to perform all of these operations is included below.
 
 ```
 df_sentiment <- df_sentiment %>%
@@ -166,4 +171,56 @@ df_sentiment <- df_sentiment %>%
 
 ```
 
+After sentiment and emotions were calculated per comment, I performed several aggregations to find how sentiment changes over time. For example, I grouped by subreddit and subreddit type and calculated the mean sentiment of all comments for that specific day. Another example I did was grouped the number of comments and threads relating to the word *ukraine* to show how comments and threads mentioning Ukraine increased dramatically around the time that Russia invaded Ukraine. A summary of my results is included below.
+
+## Results
+
+The first thing to look at was the number of threads containing the word “ukraine”. Below is a graph which shows how the number of mentions of the word “Ukraine” increased significantly immediately before and especially after the Russian invasion on February 24th, 2022.
+
+![Figure 1: Number of threads mentioning the word “Ukraine” per subreddit type created by Greg LeVay 13 May 2022](../assets/posts_img/ukrain_russia/threads_mention_ukraine.png)
+
+
+![Figure 2: Number of comments mentioning the word “Ukraine” per subreddit type created by Greg LeVay 13 May 2022](../assets/posts_img/ukrain_russia/comments_mention_ukraine.png)
+
+The next thing to look at was overall sentiment to understand if there were significant differences. According to the data, there were not significant differences in overall sentiment between conservative and liberal subreddits around the conflict. This can be observed in the graph below.
+
+![Figure 3: Sentiment Analysis Jan 01 created by Greg LeVay 13 May 2022](../assets/posts_img/ukrain_russia/sentiment_analysis.png)
+
+This graph includes data starting on January 1st, 2022. The interesting thing to note here is that sentiment in regard to Ukraine varied widely amongst most of the subreddits in early 2022, but during and after the conflict, the sentiment tended to be more neutral. To gain a more granular view, the above graph was sectioned off to be the few weeks prior and few weeks after the Russian invasion.
+
+![Figure 4: Sentiment Analysis Feb 08 created by Greg LeVay 13 May 2022](../assets/posts_img/ukrain_russia/sentiment_analysis_granular.png)
+
+There are a few noticeable trends in the above graph. The first trend to notice is that on the date of the invasion, February 24th, 2022, all of the subreddit types had negative sentiment. This is likely due to the fact that many people viewed this invasion in an overall negative light. Another trend to notice is that on specific days the conservative and liberal sentiment tended to be relative opposites, meaning where one side had a relative maximum, the other side had a relative minimum. For instance, the graph below shows an example of this phenomenon occurring on 20 Feb 2022.
+
+![Figure 5: Min/Max points Sentiment Analysis created by Greg LeVay 13 May 2022](../assets/posts_img/ukrain_russia/minmax.png)
+
+This trend is likely from specific speeches or political events surrounding the conflict occurring and the two sides having differing opinions of the future outcome of said event.
+
+#### Sentiment Analysis / Emotions
+
+Further insight was gained when looking at specific emotions, particularly negative emotions like anger, sadness, and fear. When looking specifically at “anger”, it is interesting to note that the data gathered as a whole shows that threads and comments had a far greater level of anger towards the situation a month or two prior to the invasion, and anger leveled out to a much greater extent in the few weeks immediately before and after the invasion.
+
+![Figure 6: Anger Graph created by Greg LeVay 13 May 2022](../assets/posts_img/ukrain_russia/anger_graph.png)
+
+Furthermore, looking particularly at the week before the invasion and the week after, the Conservative and Liberal categories were the only groups that had an overall increase in the amount of anger used in their comments.
+
+![Figure 7: Anger Average Table created by Greg LeVay 13 May 2022](../assets/posts_img/ukrain_russia/anger_table.png)
+
+Similar to “anger”, when looking at “joy” it’s interesting, however, not too shocking, to note that posts were far more joyous, in the months prior to the invasion, however, again, right before and right after the invasion the joy evident is minimal. Nevertheless, in the week leading up to the invasion and the week following the invasion, the positive emotion level was typically higher in the week following. This can be observed in the graph and table below.
+
+![Figure 8: Joy Graph created by 13 May 2022](../assets/posts_img/ukrain_russia/joy_graph.png)
+
+![Figure 9: Joy Average Table created by Greg LeVay 13 May 2022](../assets/posts_img/ukrain_russia/joy_table.png)
+
+## Conclusion
+
+The results of this investigation were fascinating in the fact that they were not as intuitive as previously thought. It was assumed that this particular event would cause people to have overall quite negative outlooks and experience high levels of negative emotions. From the sentiment analysis and emotion analysis it appeared that while people had an overall negative outlook in the weeks leading up to the invasion, it appears that there was more positive sentiment and emotions that quickly came in the weeks following the invasion.
+
+## Rshiny
+
+To further understand trends and to explore how public sentiment on Reddit around the Ukraine-Russia conflict changed, I created a Rshiny dashboard to showcase my analysis as well as allow anyone to explore the dashboard to uncover any other noteworthy trends. The dashboard can be accessed using this link [Current Events](https://gdlevay.shinyapps.io/sentimentanalysisukrainerussia/_w_252e1ce6/_w_cf6604a3/)
+
+
+
+* Thank you so much for reading this, please feel free to suggest improvements or provide feedback by contacing me using the links included *
 
